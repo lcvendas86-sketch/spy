@@ -463,7 +463,7 @@ function LiveDiscoveryToasts({ targetCity }: { targetCity?: string }) {
         city,
         secs,
       }
-      setToasts((prev) => [newToast, ...prev].slice(0, 3))
+      setToasts((prev) => [newToast, ...prev].slice(0, 2))
 
       // Auto-remove after 6 seconds
       setTimeout(() => {
@@ -482,26 +482,26 @@ function LiveDiscoveryToasts({ targetCity }: { targetCity?: string }) {
   if (toasts.length === 0) return null
 
   return (
-    <div className="fixed bottom-4 left-4 z-50 flex flex-col gap-2 max-w-[85vw] sm:max-w-xs pointer-events-none">
+    <div className="fixed bottom-2 left-2 z-40 flex flex-col gap-1.5 max-w-[62vw] sm:max-w-[16rem] pointer-events-none">
       {toasts.map((t) => {
         return (
           <div
             key={t.id}
-            className="animate-slide-in-notif glass-card border border-pink-500/30 rounded-xl px-3 py-2.5 shadow-lg flex items-center gap-3"
+            className="animate-slide-in-notif glass-card border border-pink-500/30 rounded-lg px-2 py-1.5 shadow-lg flex items-center gap-2 opacity-90"
           >
             <img
               src={t.photo || "/placeholder.svg"}
               alt={t.name}
               crossOrigin="anonymous"
-              className="flex-shrink-0 w-9 h-9 rounded-full object-cover border-2 border-pink-500/50"
+              className="flex-shrink-0 w-6 h-6 rounded-full object-cover border border-pink-500/50"
             />
             <div className="min-w-0">
-              <p className="text-sm text-foreground leading-tight">
+              <p className="text-[11px] text-foreground leading-tight truncate">
                 <span className="font-bold text-pink-400">{t.name}</span>{" "}
                 <span className="text-foreground">{t.text}</span>
               </p>
-              <p className="text-[11px] text-muted-foreground flex items-center gap-1 mt-0.5">
-                <MapPin size={11} className="text-pink-400" />
+              <p className="text-[9px] text-muted-foreground flex items-center gap-0.5 mt-0.5 truncate">
+                <MapPin size={9} className="text-pink-400 flex-shrink-0" />
                 {t.city} · {t.secs}s
               </p>
             </div>
@@ -1390,15 +1390,13 @@ function SpySystemContent() {
   ]
 
   // Check for search limit on mount
-  // TEMPORARILY DISABLED FOR TESTING
   useEffect(() => {
     if (typeof window !== "undefined") {
-      localStorage.removeItem(LIMIT_KEY)
-      // const existingLimit = getSearchLimitData()
-      // if (existingLimit) {
-      //   setLimitData(existingLimit)
-      //   setShowLimitReached(true)
-      // }
+      const existingLimit = getSearchLimitData()
+      if (existingLimit) {
+        setLimitData(existingLimit)
+        setShowLimitReached(true)
+      }
     }
   }, [])
 
