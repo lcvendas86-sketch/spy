@@ -479,15 +479,13 @@ function LiveDiscoveryToasts({ targetCity }: { targetCity?: string }) {
     }
   }, [userCity])
 
-  if (toasts.length === 0) return null
-
   return (
-    <div className="fixed bottom-2 left-2 z-40 flex flex-col gap-1.5 max-w-[62vw] sm:max-w-[16rem] pointer-events-none">
+    <div className="w-full max-w-md mx-auto flex flex-col gap-1.5 my-3 min-h-[2.75rem] justify-center pointer-events-none">
       {toasts.map((t) => {
         return (
           <div
             key={t.id}
-            className="animate-slide-in-notif glass-card border border-pink-500/30 rounded-lg px-2 py-1.5 shadow-lg flex items-center gap-2 opacity-90"
+            className="animate-slide-in-notif glass-card border border-pink-500/30 rounded-lg px-2.5 py-1.5 shadow-lg flex items-center gap-2 opacity-90"
           >
             <img
               src={t.photo || "/placeholder.svg"}
@@ -2433,8 +2431,7 @@ const fetchUserLocation = async () => {
   return (
   <div className="text-center space-y-8 px-4">
   <LimitWarningBanner />
-  <LiveDiscoveryToasts />
-
+  
   {/* Blinking alert - bilingual */}
   <div className="w-full max-w-md mx-auto glass-card border border-red-500/50 rounded-xl px-4 py-3 animate-blink-alert text-red-400 flex items-center justify-center gap-2">
     <AlertTriangle size={18} className="flex-shrink-0" />
@@ -2487,6 +2484,7 @@ const fetchUserLocation = async () => {
       Enter the target Instagram username
     </p>
   </div>
+  <LiveDiscoveryToasts />
   <div className="relative w-full max-w-md mx-auto">
     <User className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" size={20} />
     <input
